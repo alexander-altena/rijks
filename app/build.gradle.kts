@@ -16,6 +16,7 @@ android {
         versionCode = AndroidConfig.VERSION_CODE
         versionName = AndroidConfig.VERSION_NAME
         testInstrumentationRunner = AndroidConfig.TEST_INSTRUMENTATION_RUNNER
+
     }
 
     buildTypes {
@@ -59,13 +60,25 @@ dependencies {
     implementation (Dependencies.MOSHI)
     kapt (Dependencies.MOSHI_KAPT)
 
+    //Room
+    implementation (Dependencies.ANDROID_X_ROOM)
+    implementation (Dependencies.ANDROID_X_ROOM_KTX)
+    kapt (Dependencies.ANDROID_X_ROOM_KAPT)
+
     //DI
     implementation(Dependencies.DAGGER_HILT)
     kapt(Dependencies.DAGGER_HILT_KAPT)
 
+    //Paging
+    implementation(Dependencies.ANDROID_X_PAGING)
+
     testImplementation ("junit:junit:4.13.2")
     testImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
+
     androidTestImplementation ("androidx.test.ext:junit:1.1.2")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.3.0")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
+    androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
+
 }

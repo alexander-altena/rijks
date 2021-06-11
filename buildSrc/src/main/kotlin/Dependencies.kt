@@ -19,7 +19,7 @@ object Dependencies {
     //Room
     const val ANDROID_X_ROOM = "androidx.room:room-runtime:${Versions.ANDROID_X_ROOM_VERSION}"
     const val ANDROID_X_ROOM_KTX = "androidx.room:room-ktx:${Versions.ANDROID_X_ROOM_VERSION}"
-    const val ANDROID_X_KAPT = "androidx.room:room-compiler:${Versions.ANDROID_X_ROOM_VERSION}"
+    const val ANDROID_X_ROOM_KAPT = "androidx.room:room-compiler:${Versions.ANDROID_X_ROOM_VERSION}"
 
     // Paging
     const val ANDROID_X_PAGING = "androidx.paging:paging-runtime-ktx:${Versions.ANDROID_X_PAGING_VERSION}"
