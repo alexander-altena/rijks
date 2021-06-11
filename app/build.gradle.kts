@@ -1,7 +1,8 @@
 plugins {
     id(Plugins.ANDROID_APPLICATION)
     id(Plugins.KOTLIN_ANDROID) // or kotlin("android") or id 'kotlin-android'
-    id(Plugins.KOTLIN_KAPT) // or kotlin("kapt")
+    id(Plugins.KOTLIN_KAPT)  // or kotlin("kapt")
+    id(Plugins.DAGGER_HILT)
 }
 
 android {
@@ -41,12 +42,30 @@ android {
 
 dependencies {
 
-    implementation ("org.jetbrains.kotlin:kotlin-stdlib:${Versions.KOTLIN_VERSION}")
-    implementation ("androidx.core:core-ktx:1.5.0")
-    implementation ("androidx.appcompat:appcompat:1.3.0")
-    implementation ("com.google.android.material:material:1.3.0")
-    implementation ("androidx.constraintlayout:constraintlayout:2.0.4")
-    testImplementation ("junit:junit:4.+")
+    //Core
+    implementation (Dependencies.ANDROID_MATERIAL)
+    implementation (Dependencies.ANDROID_X_FRAGMENT_KTX)
+    implementation (Dependencies.ANDROID_X_APPCOMPAT)
+    implementation (Dependencies.ANDROID_X_LEGACY)
+
+    //Kotlin
+    implementation (Dependencies.KOTLIN)
+    implementation (Dependencies.KOTLIN_COROUTINES)
+    implementation (Dependencies.KOTLIN_COROUTINES_ANDROID)
+
+    //Network
+    implementation (Dependencies.RETROFIT)
+    implementation (Dependencies.RETROFIT_MOSHI_CONVERTER)
+    implementation (Dependencies.MOSHI)
+    kapt (Dependencies.MOSHI_KAPT)
+
+    //DI
+    implementation(Dependencies.DAGGER_HILT)
+    kapt(Dependencies.DAGGER_HILT_KAPT)
+
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
     androidTestImplementation ("androidx.test.ext:junit:1.1.2")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.3.0")
 }

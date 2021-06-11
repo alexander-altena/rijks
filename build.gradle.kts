@@ -7,6 +7,7 @@ buildscript {
     dependencies {
         classpath (Dependencies.ANDROID_TOOLS_GRADLE)
         classpath (Dependencies.KOTLIN_TOOLS_GRADLE)
+        classpath(Dependencies.DAGGER_HILT_GRADLE)
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
