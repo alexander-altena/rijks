@@ -2,7 +2,7 @@ plugins {
     id(Plugins.ANDROID_DYNAMIC_FEATURE)
     id(Plugins.KOTLIN_ANDROID) // or kotlin("android") or id 'kotlin-android'
     id(Plugins.KOTLIN_KAPT)  // or kotlin("kapt")
-//    id(Plugins.DAGGER_HILT)
+    id(Plugins.DAGGER_HILT)
 }
 android {
     compileSdkVersion(AndroidConfig.COMPILE_SDK_VERSION)
@@ -67,9 +67,9 @@ dependencies {
     //Retrofit
     implementation (Dependencies.RETROFIT)
 
-    testImplementation("junit:junit:4.13.2.")
+    testImplementation("junit:junit:4.13.2")
 
-    androidTestImplementation ("junit:junit:4.13.2.")
+    androidTestImplementation ("junit:junit:4.13.2")
     androidTestImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")
     androidTestImplementation ("androidx.test.ext:junit:1.1.2")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.3.0")
