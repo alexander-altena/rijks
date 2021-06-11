@@ -67,6 +67,7 @@ dependencies {
     //Retrofit
     implementation (Dependencies.RETROFIT)
 
+    testImplementation("junit:junit:4.13.2.")
 
     androidTestImplementation ("junit:junit:4.13.2.")
     androidTestImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")
