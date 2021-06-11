@@ -45,7 +45,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    dynamicFeatures = mutableSetOf(":features:rijksstudio")
+//    dynamicFeatures = mutableSetOf(":features:rijksstudio")
 }
 
 dependencies {
