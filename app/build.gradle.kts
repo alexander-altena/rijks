@@ -17,6 +17,12 @@ android {
         versionName = AndroidConfig.VERSION_NAME
         testInstrumentationRunner = AndroidConfig.TEST_INSTRUMENTATION_RUNNER
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf("room.schemaLocation" to "$projectDir/schemas")
+            }
+        }
+
     }
 
     buildTypes {
@@ -39,6 +45,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    dynamicFeatures = mutableSetOf(":features:rijksstudio")
 }
 
 dependencies {
