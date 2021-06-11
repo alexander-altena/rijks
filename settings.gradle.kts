@@ -1,1 +1,5 @@
-include (":app")
+include (
+    ":app",
+    ":features:rijksstudio"
+)
+
