@@ -1,0 +1,9 @@
+package com.example.rijks.data.network.model
+
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
+data class ArtObjectDetailJson(
+    val label : ArtObjectDetailLabelJson,
+    val webImage: ArtWebImageJson
+)
