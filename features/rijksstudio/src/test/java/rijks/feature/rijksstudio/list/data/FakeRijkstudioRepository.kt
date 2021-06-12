@@ -5,6 +5,7 @@ import com.example.rijks.domain.model.ArtObject
 import com.example.rijks.domain.model.ArtObjectDetail
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import rijks.feature.rijksstudio.list.domain.RijksstudioRepository
 
 class FakeRijkstudioRepository : RijksstudioRepository {
 
