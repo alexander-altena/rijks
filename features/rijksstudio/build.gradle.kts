@@ -26,6 +26,8 @@ android {
 
     }
 
+    dataBinding.isEnabled = true
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -38,36 +40,18 @@ android {
 dependencies {
     implementation(project(ModuleDependency.APP))
 
-    //Core
-    implementation (Dependencies.ANDROID_MATERIAL)
-    implementation (Dependencies.ANDROID_X_FRAGMENT_KTX)
-    implementation (Dependencies.ANDROID_X_APPCOMPAT)
-    implementation (Dependencies.ANDROID_X_LEGACY)
-
-    //Kotlin
-    implementation (Dependencies.KOTLIN)
-    implementation (Dependencies.KOTLIN_COROUTINES)
-    implementation (Dependencies.KOTLIN_COROUTINES_ANDROID)
-
     //viewModel
     implementation(Dependencies.ANDROID_X_VIEWMODEL)
 
-    //Room
-    implementation (Dependencies.ANDROID_X_ROOM)
-    implementation (Dependencies.ANDROID_X_ROOM_KTX)
     kapt (Dependencies.ANDROID_X_ROOM_KAPT)
 
-    //DI
     implementation(Dependencies.DAGGER_HILT)
     kapt(Dependencies.DAGGER_HILT_KAPT)
 
-    //Paging
-    implementation(Dependencies.ANDROID_X_PAGING)
-
-    //Retrofit
-    implementation (Dependencies.RETROFIT)
-
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
 
     androidTestImplementation ("junit:junit:4.13.2")
     androidTestImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")

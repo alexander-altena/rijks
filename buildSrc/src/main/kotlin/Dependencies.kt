@@ -21,6 +21,11 @@ object Dependencies {
     const val ANDROID_X_ROOM_KTX = "androidx.room:room-ktx:${Versions.ANDROID_X_ROOM_VERSION}"
     const val ANDROID_X_ROOM_KAPT = "androidx.room:room-compiler:${Versions.ANDROID_X_ROOM_VERSION}"
 
+    //Navigation
+    const val ANDROID_X_NAV_FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:${Versions.NAV_VERSION}"
+    const val ANDROID_X_NAV_KTX = "androidx.navigation:navigation-ui-ktx:${Versions.NAV_VERSION}"
+    const val ANDROID_X_NAV_DYNAMIC = "androidx.navigation:navigation-dynamic-features-fragment:${Versions.NAV_VERSION}"
+
     // Paging
     const val ANDROID_X_PAGING = "androidx.paging:paging-runtime-ktx:${Versions.ANDROID_X_PAGING_VERSION}"
 

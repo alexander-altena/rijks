@@ -32,6 +32,7 @@ class RijksstudioRemoteMediator(
             }
             LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
             LoadType.APPEND -> {
+                println("fetching items")
                 val remoteKeys = getRemoteKeyForLastItem(state)
                 when {
                     remoteKeys == null -> RIJKS_STARTING_PAGE_INDEX
@@ -47,7 +48,7 @@ class RijksstudioRemoteMediator(
                 "p" to "$page",
                 "ps" to "${RijksstudioRepositoryImp.RIJKS_NETWORK_PAGE_SIZE}"
             ))
-
+            println("fetching items response $response")
             val endOfPaginationReached = response.artObjects.isEmpty()
             db.withTransaction {
                 // Clear all tables in the database
@@ -65,8 +66,10 @@ class RijksstudioRemoteMediator(
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: IOException) {
+            println("fetching io exception $exception")
             return MediatorResult.Error(exception)
         } catch (exception: HttpException) {
+            println("fetching http exception $exception")
             return MediatorResult.Error(exception)
         }
     }

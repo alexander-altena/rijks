@@ -25,8 +25,6 @@ import kotlin.test.assertTrue
 class RijksstudioRemoteMediatorTest{
     private lateinit var database: RijksDatabase
 
-    private val networkPageSize = 10
-    private val loadSize = 2
     private val fakeObjects = listOf(
         ArtObjectJson("0", "name_0", "title", true, "maker", "makerLong", true, true, ArtWebImageJson(0,0,"url")),
         ArtObjectJson("1", "name_1", "title", true, "maker", "makerLong", true, true, ArtWebImageJson(0,0,"url"))
@@ -53,7 +51,7 @@ class RijksstudioRemoteMediatorTest{
     @Test
     fun refreshLoadReturnsSuccessResultWhenMoreDataIsPresent() = runBlocking {
         // Add mock results for the API to return.
-        fakeObjects.forEach { post -> fakeApi.setArtObjects(post) }
+        fakeObjects.forEach { art -> fakeApi.setArtObjects(art) }
         val remoteMediator = RijksstudioRemoteMediator(
             database,
             database.artObjectsDao(),

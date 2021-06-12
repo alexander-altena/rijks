@@ -37,6 +37,9 @@ class FakeRetrofitService  : RijksRetrofitService {
         objectNumber: String,
         key: String
     ): ArtObjectDetailResponseJson {
+        failureMsg?.let {
+            throw IOException(it)
+        }
         return artObjectDetailJson
     }
 }
