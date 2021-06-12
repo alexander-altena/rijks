@@ -34,7 +34,11 @@ android {
     }
 
     buildFeatures {
+
         dataBinding = true
+
+        // for view binding:
+        // viewBinding = true
     }
 
     compileOptions {
@@ -51,33 +55,38 @@ android {
 dependencies {
 
     //Core
-    implementation (Dependencies.ANDROID_MATERIAL)
-    implementation (Dependencies.ANDROID_X_FRAGMENT_KTX)
-    implementation (Dependencies.ANDROID_X_APPCOMPAT)
-    implementation (Dependencies.ANDROID_X_LEGACY)
+    api (Dependencies.ANDROID_MATERIAL)
+    api (Dependencies.ANDROID_X_FRAGMENT_KTX)
+    api (Dependencies.ANDROID_X_APPCOMPAT)
+    api (Dependencies.ANDROID_X_LEGACY)
 
     //Kotlin
-    implementation (Dependencies.KOTLIN)
-    implementation (Dependencies.KOTLIN_COROUTINES)
-    implementation (Dependencies.KOTLIN_COROUTINES_ANDROID)
+    api (Dependencies.KOTLIN)
+    api (Dependencies.KOTLIN_COROUTINES)
+    api (Dependencies.KOTLIN_COROUTINES_ANDROID)
 
     //Network
-    implementation (Dependencies.RETROFIT)
-    implementation (Dependencies.RETROFIT_MOSHI_CONVERTER)
-    implementation (Dependencies.MOSHI)
+    api (Dependencies.RETROFIT)
+    api (Dependencies.RETROFIT_MOSHI_CONVERTER)
+    api (Dependencies.MOSHI)
     kapt (Dependencies.MOSHI_KAPT)
 
     //Room
-    implementation (Dependencies.ANDROID_X_ROOM)
-    implementation (Dependencies.ANDROID_X_ROOM_KTX)
+    api (Dependencies.ANDROID_X_ROOM)
+    api (Dependencies.ANDROID_X_ROOM_KTX)
     kapt (Dependencies.ANDROID_X_ROOM_KAPT)
+
+    //Navigation
+    api(Dependencies.ANDROID_X_NAV_KTX)
+    api(Dependencies.ANDROID_X_NAV_FRAGMENT_KTX)
+    api(Dependencies.ANDROID_X_NAV_DYNAMIC)
 
     //DI
     implementation(Dependencies.DAGGER_HILT)
     kapt(Dependencies.DAGGER_HILT_KAPT)
 
     //Paging
-    implementation(Dependencies.ANDROID_X_PAGING)
+    api(Dependencies.ANDROID_X_PAGING)
 
     testImplementation ("junit:junit:4.13.2")
     testImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")

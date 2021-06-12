@@ -8,7 +8,7 @@ data class ArtObjectJson(
     val objectNumber : String,
     val title : String,
     val hasImage : Boolean,
-    val principalOrFirstMaker : String,
+    val principalOrFirstMaker : String?,
     val longTitle : String,
     val showImage : Boolean,
     val permitDownload : Boolean,

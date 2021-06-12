@@ -15,6 +15,9 @@ object Versions {
     //Room
     const val ANDROID_X_ROOM_VERSION = "2.3.0"
 
+    //Navigation
+    const val NAV_VERSION = "2.3.5"
+
     //Paging
     const val ANDROID_X_PAGING_VERSION = "3.0.0"
 
