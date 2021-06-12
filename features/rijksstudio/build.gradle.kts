@@ -3,6 +3,7 @@ plugins {
     id(Plugins.KOTLIN_ANDROID) // or kotlin("android") or id 'kotlin-android'
     id(Plugins.KOTLIN_KAPT)  // or kotlin("kapt")
     id(Plugins.DAGGER_HILT)
+    id("kotlin-android")
 }
 android {
     compileSdkVersion(AndroidConfig.COMPILE_SDK_VERSION)
@@ -55,6 +56,8 @@ dependencies {
     //Room
     implementation (Dependencies.ANDROID_X_ROOM)
     implementation (Dependencies.ANDROID_X_ROOM_KTX)
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
     kapt (Dependencies.ANDROID_X_ROOM_KAPT)
 
     //DI
@@ -68,6 +71,9 @@ dependencies {
     implementation (Dependencies.RETROFIT)
 
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
 
     androidTestImplementation ("junit:junit:4.13.2")
     androidTestImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")
