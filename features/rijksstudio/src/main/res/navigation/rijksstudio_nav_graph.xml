@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/artObjectListFragment"
-        android:name="rijks.feature.rijksstudio.list.presentation.ArtObjectListFragment"
+        android:name="rijks.feature.rijksstudio.list.presentation.RijksstudioListFragment"
         android:label="ArtObjectListFragment"
         app:moduleName="rijksstudio"
         />

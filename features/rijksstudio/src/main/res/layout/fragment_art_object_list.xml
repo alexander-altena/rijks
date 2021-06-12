@@ -19,7 +19,7 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:contentScrim="#000"
-                app:statusBarScrim="#DD4A00"
+                app:statusBarScrim="@android:color/transparent"
                 app:collapsedTitleGravity="center"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:title="Rijksmuseum"
@@ -53,6 +53,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingBottom="55dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

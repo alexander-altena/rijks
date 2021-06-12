@@ -7,7 +7,6 @@ import com.example.rijks.data.database.RijksDatabase
 import com.example.rijks.data.network.service.RijksRetrofitService
 import com.example.rijks.domain.model.ArtObject
 import com.example.rijks.domain.model.ArtObjectDetail
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import rijks.feature.rijksstudio.list.domain.RijksstudioRepository
 import javax.inject.Inject

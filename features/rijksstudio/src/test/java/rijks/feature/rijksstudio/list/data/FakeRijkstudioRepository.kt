@@ -1,13 +1,10 @@
 package rijks.feature.rijksstudio.list.data
 
 import androidx.paging.PagingData
-import com.example.rijks.data.network.model.ArtObjectJson
 import com.example.rijks.domain.model.ArtObject
 import com.example.rijks.domain.model.ArtObjectDetail
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import rijks.feature.rijksstudio.list.domain.RijksstudioRepository
-import java.io.IOException
 
 class FakeRijkstudioRepository : RijksstudioRepository {
 
