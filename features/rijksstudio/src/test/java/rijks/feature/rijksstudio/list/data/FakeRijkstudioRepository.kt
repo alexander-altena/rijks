@@ -28,9 +28,7 @@ class FakeRijkstudioRepository : RijksstudioRepository {
 
     override fun getAllArtObjects(): Flow<PagingData<ArtObject>> {
         return flow {
-            emit(Result.success(pagingData)
-
-            )
+            emit(pagingData)
         }
     }
 

@@ -13,10 +13,10 @@ import rijks.feature.rijksstudio.R
 import rijks.feature.rijksstudio.databinding.FragmentArtObjectListBinding
 
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class ArtObjectListFragment : Fragment() {
 
-    private val viewModel: ArtObjectListViewModel by viewModels()
+//    private val viewModel: ArtObjectListViewModel by viewModels()
     private lateinit var binding: FragmentArtObjectListBinding
     private lateinit var layoutManager: LinearLayoutManager
 
