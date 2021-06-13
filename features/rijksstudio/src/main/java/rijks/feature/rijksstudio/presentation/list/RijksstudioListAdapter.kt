@@ -1,16 +1,19 @@
-package rijks.feature.rijksstudio.list.presentation
+package rijks.feature.rijksstudio.presentation.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.rijks.domain.model.ArtObject
 import rijks.feature.rijksstudio.databinding.ItemArtObjectListBinding
 
 class RijksstudioListAdapter : PagingDataAdapter<ArtObject, RijksstudioListAdapter.ArtObjectViewHolder>(
     ArtObjectComparator
 ) {
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -21,7 +24,6 @@ class RijksstudioListAdapter : PagingDataAdapter<ArtObject, RijksstudioListAdapt
 
     override fun onBindViewHolder(holder: ArtObjectViewHolder, position: Int) {
         val item = getItem(position)
-        print("the item is ${item?.title}")
         item?.let { holder.bindArtObject(it) }
 
     }
@@ -31,12 +33,12 @@ class RijksstudioListAdapter : PagingDataAdapter<ArtObject, RijksstudioListAdapt
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindArtObject(item: ArtObject) = with(binding) {
-//            rijksstudioItemImg.load(item.imageUrl)
+            rijksstudioItemImg.load(item.imageUrl)
             rijksstudioItemTitle.text = item.title
-//            val directions = ArtObjectListFragmentDirections.actionArtObjectListFragmentToArtObjectDetailFragment(item.objectNumber)
-//            root.setOnClickListener {
-//                it.findNavController().navigate(directions)
-//            }
+            val directions = RijksstudioListFragmentDirections.showArtObjectDetail(item.objectNumber)
+            root.setOnClickListener {
+                it.findNavController().navigate(directions)
+            }
         }
 
     }

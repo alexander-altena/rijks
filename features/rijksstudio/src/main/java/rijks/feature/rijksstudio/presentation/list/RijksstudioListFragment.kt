@@ -1,4 +1,4 @@
-package rijks.feature.rijksstudio.list.presentation
+package rijks.feature.rijksstudio.presentation.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,17 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rijks.di.RijksstudioModuleDependencies
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.EntryPointAccessors
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import rijks.feature.rijksstudio.R
-import rijks.feature.rijksstudio.databinding.FragmentArtObjectListBinding
-import rijks.feature.rijksstudio.list.di.DaggerRijksstudioListComponent
+import rijks.feature.rijksstudio.databinding.FragmentRijksstudioListBinding
+import rijks.feature.rijksstudio.di.DaggerRijksstudioListComponent
 import javax.inject.Inject
 
 
@@ -24,7 +24,7 @@ class RijksstudioListFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: RijksstudioListViewModel
-    private lateinit var binding: FragmentArtObjectListBinding
+    private lateinit var binding: FragmentRijksstudioListBinding
     private lateinit var artObjectsAdapter: RijksstudioListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +40,7 @@ class RijksstudioListFragment : Fragment() {
             .inject(this)
 
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -49,7 +50,7 @@ class RijksstudioListFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.fragment_art_object_list,
+            R.layout.fragment_rijksstudio_list,
             container,
             false
         )
@@ -59,32 +60,21 @@ class RijksstudioListFragment : Fragment() {
 
     private fun setUpRvWithArtObjectAdapter(){
         artObjectsAdapter = RijksstudioListAdapter()
-        artObjectsAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        binding.rijksstudioRecyclerview.setHasFixedSize(true)
-        binding.rijksstudioRecyclerview.adapter = artObjectsAdapter.withLoadStateFooter(
-            footer = ArtLoadingStateAdapter()
-        )
-
+        binding.rijksstudioRecyclerview.apply {
+            setHasFixedSize(true)
+            adapter = artObjectsAdapter.withLoadStateFooter(footer = ArtLoadingStateAdapter())
+            artObjectsAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        }
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        launchArtObjectsFlow()
-
-    }
-
-    private fun launchArtObjectsFlow() {
-        lifecycleScope.launch {
-            viewModel.getArtObjects().collectLatest { pagedData ->
-                artObjectsAdapter.submitData(pagedData)
+        viewLifecycleOwner.lifecycleScope.launch{
+            viewModel.getArtObjects().collect {
+                artObjectsAdapter.submitData(viewLifecycleOwner.lifecycle, it)
             }
         }
-    }
-
-    override fun onPause() {
-//        homeViewModel.setRvPosition(layoutManager.findFirstCompletelyVisibleItemPosition())
-        super.onPause()
     }
 
     override fun onDestroyView() {

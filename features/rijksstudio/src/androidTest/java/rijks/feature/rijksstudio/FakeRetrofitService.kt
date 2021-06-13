@@ -5,12 +5,14 @@ import com.example.rijks.data.network.model.ArtObjectDetailResponseJson
 import com.example.rijks.data.network.model.ArtObjectJson
 import com.example.rijks.data.network.model.ArtObjectResponseJson
 import com.example.rijks.data.network.service.RijksRetrofitService
+import okhttp3.ResponseBody
+import retrofit2.Response
 import java.io.IOException
 
 class FakeRetrofitService  : RijksRetrofitService {
     private val artObjects = mutableListOf<ArtObjectJson>()
     var failureMsg: String? = null
-    private lateinit var artObjectDetailJson: ArtObjectDetailResponseJson
+    private lateinit var artObjectDetail: ArtObjectDetailJson
 
     fun setArtObjects(artObjectJson: ArtObjectJson){
         artObjects.add(artObjectJson)
@@ -18,6 +20,10 @@ class FakeRetrofitService  : RijksRetrofitService {
 
     fun clearArtObjects(){
         artObjects.clear()
+    }
+
+    fun setArtObjectDetailResonse(artObjectDetailResponseJson: ArtObjectDetailJson){
+        artObjectDetail = artObjectDetailResponseJson
     }
 
 
@@ -36,10 +42,10 @@ class FakeRetrofitService  : RijksRetrofitService {
         culture: String,
         objectNumber: String,
         key: String
-    ): ArtObjectDetailResponseJson {
+    ): Response<ArtObjectDetailResponseJson> {
         failureMsg?.let {
-            throw IOException(it)
+          return Response.error(1, ResponseBody.create(null, ""))
         }
-        return artObjectDetailJson
+        return Response.success(ArtObjectDetailResponseJson(artObjectDetail))
     }
 }

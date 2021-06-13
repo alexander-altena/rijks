@@ -3,6 +3,7 @@ plugins {
     id(Plugins.KOTLIN_ANDROID) // or kotlin("android") or id 'kotlin-android'
     id(Plugins.KOTLIN_KAPT)  // or kotlin("kapt")
     id(Plugins.DAGGER_HILT)
+    id(Plugins.SAFE_ARGS)
 }
 android {
     compileSdkVersion(AndroidConfig.COMPILE_SDK_VERSION)
@@ -57,5 +58,5 @@ dependencies {
     androidTestImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")
     androidTestImplementation ("androidx.test.ext:junit:1.1.2")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.3.0")
-    androidTestImplementation ("androidx.annotation:annotation:1.1.0")
+    androidTestImplementation ("androidx.annotation:annotation:1.2.0")
 }

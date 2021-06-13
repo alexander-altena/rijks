@@ -14,6 +14,6 @@ interface RijksRetrofitService {
     suspend fun getAllArtObjects(@Path("culture") culture: String, @QueryMap options: HashMap<String, String>): ArtObjectResponseJson
 
     @GET("{culture}/collection/{objectNumber}")
-    suspend fun getArtObjectDetails(@Path("culture") culture: String, @Path("objectNumber") objectNumber: String, @Query("key") key: String): ArtObjectDetailResponseJson
+    suspend fun getArtObjectDetails(@Path("culture") culture: String, @Path("objectNumber") objectNumber: String, @Query("key") key: String): Response<ArtObjectDetailResponseJson>
 
 }

@@ -6,8 +6,22 @@
 
     <fragment
         android:id="@+id/artObjectListFragment"
-        android:name="rijks.feature.rijksstudio.list.presentation.RijksstudioListFragment"
+        android:name="rijks.feature.rijksstudio.presentation.list.RijksstudioListFragment"
         android:label="ArtObjectListFragment"
         app:moduleName="rijksstudio"
-        />
+        >
+        <action
+            android:id="@+id/showArtObjectDetail"
+            app:destination="@id/rijksstudioDetailFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/rijksstudioDetailFragment"
+        android:name="rijks.feature.rijksstudio.presentation.detail.RijksstudioDetailFragment"
+        android:label="RijksstudioDetailFragment" >
+        <argument
+            android:name="objectId"
+            app:argType="string" />
+    </fragment>
 </navigation>

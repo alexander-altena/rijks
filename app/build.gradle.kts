@@ -3,6 +3,7 @@ plugins {
     id(Plugins.KOTLIN_ANDROID) // or kotlin("android") or id 'kotlin-android'
     id(Plugins.KOTLIN_KAPT)  // or kotlin("kapt")
     id(Plugins.DAGGER_HILT)
+    id(Plugins.SAFE_ARGS)
 }
 
 android {
@@ -87,6 +88,9 @@ dependencies {
 
     //Paging
     api(Dependencies.ANDROID_X_PAGING)
+
+    //Coil
+    api(Dependencies.COIL)
 
     testImplementation ("junit:junit:4.13.2")
     testImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")
