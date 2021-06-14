@@ -15,7 +15,6 @@ object Dependencies {
 
     // ViewModel
     const val ANDROID_X_VIEWMODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ANDROID_X_LIFECYCLE_VERSION}"
-    const val ANDROID_X_LIFECYCLE = "androidx.lifecycle:lifecycle-common-java8:${Versions.ANDROID_X_LIFECYCLE_VERSION}"
 
     //Room
     const val ANDROID_X_ROOM = "androidx.room:room-runtime:${Versions.ANDROID_X_ROOM_VERSION}"

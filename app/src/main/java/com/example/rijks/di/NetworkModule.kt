@@ -1,7 +1,6 @@
 package com.example.rijks.di
 
 import com.example.rijks.data.network.service.RijksRetrofitService
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

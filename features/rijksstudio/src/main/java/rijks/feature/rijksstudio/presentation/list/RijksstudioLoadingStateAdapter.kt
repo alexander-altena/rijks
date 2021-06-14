@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import rijks.feature.rijksstudio.databinding.ItemLoadingStateBinding
 
 
-class ArtLoadingStateAdapter() : LoadStateAdapter<ArtLoadingStateAdapter.ArtObjectLoadStateViewHolder>() {
+class ArtLoadingStateAdapter : LoadStateAdapter<ArtLoadingStateAdapter.ArtObjectLoadStateViewHolder>() {
 
     inner class ArtObjectLoadStateViewHolder(
         private val binding: ItemLoadingStateBinding,

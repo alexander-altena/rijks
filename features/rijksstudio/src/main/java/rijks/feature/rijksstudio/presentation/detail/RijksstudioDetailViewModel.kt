@@ -20,8 +20,6 @@ class RijksstudioDetailViewModel @Inject constructor(private val rijksstudioRepo
         viewModelScope.launch {
             _artObjectDetail.postValue(Resource.loading(null))
             val response = rijksstudioRepository.getArtObjectDetail(objectId)
-            println("the detail object is ${response.data?.description}")
-            println("the detail object is ${response.data?.description}")
            _artObjectDetail.postValue(response)
         }
     }

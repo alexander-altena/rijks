@@ -8,6 +8,7 @@ import com.example.rijks.data.database.RijksDatabase
 import com.example.rijks.data.network.service.RijksRetrofitService
 import com.example.rijks.domain.model.ArtObject
 import com.example.rijks.domain.model.ArtObjectDetail
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import rijks.feature.rijksstudio.domain.RijksstudioRepository
 import javax.inject.Inject
@@ -21,23 +22,26 @@ class RijksstudioRepositoryImp @Inject constructor(
     RijksstudioRepository {
 
     @ExperimentalPagingApi
-    override fun getAllArtObjects() = Pager(
-        config = PagingConfig(RIJKS_NETWORK_PAGE_SIZE,
-            enablePlaceholders = false,
-
-
-        ),
-        remoteMediator = RijksstudioRemoteMediator(database, artObjectDao, remoteKeysDao, service)
-    ) {
-        artObjectDao.artObjects()
-    }.flow.map { paginData ->
-        paginData.map {
-            ArtObject(
-                it.id,
-                it.objectNumber,
-                it.title,
-                it.principalOrFirstMaker ?: "",it.imageUrl, it.imgRatio
-            )
+    override fun getAllArtObjects(): Flow<PagingData<ArtObject>> {
+        val pagingSourceFactory = { artObjectDao.artObjects() }
+        return Pager(
+            config = PagingConfig(pageSize = RIJKS_NETWORK_PAGE_SIZE),
+            remoteMediator = RijksstudioRemoteMediator(
+                database,
+                artObjectDao,
+                remoteKeysDao,
+                service
+            ),
+            pagingSourceFactory = pagingSourceFactory
+        ).flow.map { paginData ->
+            paginData.map {
+                ArtObject(
+                    it.id,
+                    it.objectNumber,
+                    it.title,
+                    it.principalOrFirstMaker ?: "", it.imageUrl, it.imgRatio
+                )
+            }
         }
     }
 

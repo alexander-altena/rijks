@@ -13,10 +13,6 @@ class FakeRijkstudioRepository : RijksstudioRepository {
     private lateinit var pagingData: PagingData<ArtObject>
     private var artObjectDetail : ArtObjectDetail? = null
 
-    fun setPagingData(pagina: PagingData<ArtObject>){
-       pagingData = pagina
-    }
-
     fun setArtObjectDetail(artObjectDetail: ArtObjectDetail){
         this.artObjectDetail = artObjectDetail
     }
