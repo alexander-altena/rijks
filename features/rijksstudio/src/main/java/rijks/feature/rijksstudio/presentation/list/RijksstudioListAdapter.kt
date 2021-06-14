@@ -2,24 +2,47 @@ package rijks.feature.rijksstudio.presentation.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.example.rijks.domain.model.ArtObject
-import rijks.feature.rijksstudio.databinding.ItemArtObjectListBinding
+import rijks.feature.rijksstudio.R
+import rijks.feature.rijksstudio.BR
 
-class RijksstudioListAdapter : PagingDataAdapter<ArtObject, RijksstudioListAdapter.ArtObjectViewHolder>(
-    ArtObjectComparator
-) {
+private const val NORMAL: Int = R.layout.item_art_object_list
+private const val PORTRAIT: Int = R.layout.item_art_object_list_portrait
+private const val HEADER: Int = R.layout.item_art_object_header
 
+class RijksstudioListAdapter :
+    PagingDataAdapter<ArtObject, RijksstudioListAdapter.ArtObjectViewHolder>(
+        ArtObjectComparator
+    ) {
+
+
+    override fun getItemViewType(position: Int): Int {
+        val item = getItem(position)
+        if (item == null || item.imgRatio < 0.7) {
+            println(" the image ratio is ${item?.imgRatio}")
+            return NORMAL
+        }
+        return PORTRAIT
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ArtObjectViewHolder {
-       return ArtObjectViewHolder(ItemArtObjectListBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ArtObjectViewHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                viewType,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ArtObjectViewHolder, position: Int) {
@@ -29,13 +52,14 @@ class RijksstudioListAdapter : PagingDataAdapter<ArtObject, RijksstudioListAdapt
     }
 
 
-    inner class ArtObjectViewHolder(private val binding: ItemArtObjectListBinding) :
+    inner class ArtObjectViewHolder(private val binding: ViewDataBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindArtObject(item: ArtObject) = with(binding) {
-            rijksstudioItemImg.load(item.imageUrl)
-            rijksstudioItemTitle.text = item.title
-            val directions = RijksstudioListFragmentDirections.showArtObjectDetail(item.objectNumber)
+            setVariable(BR.artObject, item)
+            executePendingBindings()
+            val directions =
+                RijksstudioListFragmentDirections.showArtObjectDetail(item.objectNumber)
             root.setOnClickListener {
                 it.findNavController().navigate(directions)
             }

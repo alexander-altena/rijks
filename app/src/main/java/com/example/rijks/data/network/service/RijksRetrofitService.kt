@@ -2,6 +2,7 @@ package com.example.rijks.data.network.service
 
 import com.example.rijks.data.network.model.ArtObjectDetailResponseJson
 import com.example.rijks.data.network.model.ArtObjectResponseJson
+import com.example.rijks.data.network.model.ArtWebImageJson
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

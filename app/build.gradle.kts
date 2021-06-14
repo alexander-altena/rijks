@@ -24,6 +24,10 @@ android {
             }
         }
 
+        testOptions {
+            unitTests.isIncludeAndroidResources = true
+        }
+
     }
 
     buildTypes {
@@ -92,13 +96,15 @@ dependencies {
     //Coil
     api(Dependencies.COIL)
 
+
     testImplementation ("junit:junit:4.13.2")
-    testImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
+    testImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.5.0")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
 
     androidTestImplementation ("androidx.test.ext:junit:1.1.2")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.3.0")
-    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
     androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
 
+    debugImplementation("androidx.fragment:fragment-testing:1.3.4")
 }

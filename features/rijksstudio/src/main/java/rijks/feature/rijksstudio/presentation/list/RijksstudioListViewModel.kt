@@ -6,7 +6,6 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.rijks.domain.model.ArtObject
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import rijks.feature.rijksstudio.domain.RijksstudioRepository
 import javax.inject.Inject
 

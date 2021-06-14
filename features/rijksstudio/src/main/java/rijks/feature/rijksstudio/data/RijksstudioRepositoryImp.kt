@@ -12,42 +12,62 @@ import kotlinx.coroutines.flow.map
 import rijks.feature.rijksstudio.domain.RijksstudioRepository
 import javax.inject.Inject
 
-class RijksstudioRepositoryImp @Inject constructor(private val service: RijksRetrofitService, private val database: RijksDatabase, private val artObjectDao: ArtObjectDao, private val remoteKeysDao: RemoteKeysDao) :
+class RijksstudioRepositoryImp @Inject constructor(
+    private val service: RijksRetrofitService,
+    private val database: RijksDatabase,
+    private val artObjectDao: ArtObjectDao,
+    private val remoteKeysDao: RemoteKeysDao
+) :
     RijksstudioRepository {
 
     @ExperimentalPagingApi
     override fun getAllArtObjects() = Pager(
-        config = PagingConfig(RIJKS_NETWORK_PAGE_SIZE, enablePlaceholders = false),
+        config = PagingConfig(RIJKS_NETWORK_PAGE_SIZE,
+            enablePlaceholders = false,
+
+
+        ),
         remoteMediator = RijksstudioRemoteMediator(database, artObjectDao, remoteKeysDao, service)
-    ){
+    ) {
         artObjectDao.artObjects()
     }.flow.map { paginData ->
         paginData.map {
-            ArtObject(it.id, it.objectNumber, it.title, it.principalOrFirstMaker?: "", it.imageUrl)
+            ArtObject(
+                it.id,
+                it.objectNumber,
+                it.title,
+                it.principalOrFirstMaker ?: "",it.imageUrl, it.imgRatio
+            )
         }
     }
-
 
 
     override suspend fun getArtObjectDetail(objectId: String): Resource<ArtObjectDetail> {
         return try {
             val response = service.getArtObjectDetails("EN", objectId, "0fiuZFh4")
-            if(response.isSuccessful) {
+            if (response.isSuccessful) {
                 response.body()?.let {
                     val label = it.artObject.label
-                    return Resource.success(ArtObjectDetail(label.title, label.makerLine, label.description, it.artObject.webImage.url ))
+                    return Resource.success(
+                        ArtObjectDetail(
+                            label.title,
+                            label.makerLine,
+                            label.description,
+                            it.artObject.webImage.url
+                        )
+                    )
                 } ?: Resource.error("An unknown error occured", null)
             } else {
-                Resource.error("An unknown error occured", null)
+                Resource.error(response.message(), null)
             }
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             Resource.error("Couldn't reach the server. Check your internet connection", null)
         }
 
 
     }
 
-    companion object{
-        const val RIJKS_NETWORK_PAGE_SIZE = 50
+    companion object {
+        const val RIJKS_NETWORK_PAGE_SIZE = 20
     }
 }

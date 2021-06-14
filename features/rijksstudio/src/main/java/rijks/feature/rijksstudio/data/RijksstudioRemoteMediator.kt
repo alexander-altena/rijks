@@ -11,9 +11,8 @@ import retrofit2.HttpException
 import java.io.IOException
 
 const val RIJKS_STARTING_PAGE_INDEX = 0;
-const val TEST = "test"
 
-@OptIn(ExperimentalPagingApi::class)
+@ExperimentalPagingApi
 class RijksstudioRemoteMediator(
     private val db: RijksDatabase,
     private val artObjectDao: ArtObjectDao,
@@ -30,7 +29,10 @@ class RijksstudioRemoteMediator(
     }
 
 
-    override suspend fun load(loadType: LoadType, state: PagingState<Int, ArtObjectEntity>): MediatorResult {
+    override suspend fun load(
+        loadType: LoadType,
+        state: PagingState<Int, ArtObjectEntity>
+    ): MediatorResult {
 
         val page = when (loadType) {
             LoadType.REFRESH -> {
@@ -63,12 +65,14 @@ class RijksstudioRemoteMediator(
 
 
         try {
-            val apiResponse = rijksstudioApi.getAllArtObjects("nl", hashMapOf(
-                "key" to "0fiuZFh4",
-                "imgonly" to "True",
-                "p" to "$page",
-                "ps" to "${RijksstudioRepositoryImp.RIJKS_NETWORK_PAGE_SIZE}"
-            ))
+            val apiResponse = rijksstudioApi.getAllArtObjects(
+                "EN", hashMapOf(
+                    "key" to "0fiuZFh4",
+                    "imgonly" to "True",
+                    "p" to "$page",
+                    "ps" to "${RijksstudioRepositoryImp.RIJKS_NETWORK_PAGE_SIZE}"
+                )
+            )
 
             val artObjects = apiResponse.artObjects
             val endOfPaginationReached = artObjects.isEmpty()
@@ -84,7 +88,21 @@ class RijksstudioRemoteMediator(
                     RemoteKeysEntity(artObjectId = it.id, prevKey = prevKey, nextKey = nextKey)
                 }
                 remoteKeyDao.insertAllKeys(keys)
-                artObjectDao.insertAll(artObjects.map { ArtObjectEntity(it.id, it.objectNumber, it.title, it.principalOrFirstMaker ?: "", it.webImage?.url ?: "") })
+
+                artObjectDao.insertAll(artObjects.map {
+                    val height = it.webImage?.height ?: 0
+                    val width = it.webImage?.width ?: 0
+
+                    ArtObjectEntity(
+                        it.id,
+                        it.objectNumber,
+                        it.title,
+                        it.principalOrFirstMaker ?: "",
+                        it.webImage?.url ?: "",
+                        height.toFloat()/width
+
+                    )
+                })
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: IOException) {
@@ -121,7 +139,7 @@ class RijksstudioRemoteMediator(
         // Get the item closest to the anchor position
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { artId ->
-               remoteKeyDao.remoteKeysRepoId(artId)
+                remoteKeyDao.remoteKeysRepoId(artId)
             }
         }
     }
