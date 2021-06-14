@@ -3,7 +3,7 @@
     <dimen name="home_app_bar_height">233dp</dimen>
 
     <!--  List item dimens  -->
-    <dimen name="art_object_list_margin">5dp</dimen>
+    <dimen name="art_object_list_margin_tb">5dp</dimen>
     <dimen name="art_object_list_item_elevation">4dp</dimen>
     <dimen name="art_object_list_item_height">300dp</dimen>
     <dimen name="art_object_list_img_height">233dp</dimen>
@@ -13,4 +13,7 @@
     <dimen name="art_object_list_portrait_margin">5dp</dimen>
     <dimen name="art_object_list_item_portrait_elevation">4dp</dimen>
     <dimen name="art_object_list_item_portrait_height">233dp</dimen>
+
+    <!--  List item Detail dimens  -->
+    <dimen name="art_object_detail_text_padding">13dp</dimen>
 </resources>

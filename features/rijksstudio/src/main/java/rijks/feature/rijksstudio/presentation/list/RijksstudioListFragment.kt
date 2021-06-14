@@ -4,15 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rijks.di.RijksstudioModuleDependencies
 import dagger.hilt.android.EntryPointAccessors
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import rijks.feature.rijksstudio.R
 import rijks.feature.rijksstudio.databinding.FragmentRijksstudioListBinding
@@ -25,7 +27,7 @@ class RijksstudioListFragment : Fragment() {
     @Inject
     lateinit var viewModel: RijksstudioListViewModel
     private lateinit var binding: FragmentRijksstudioListBinding
-    private lateinit var artObjectsAdapter: RijksstudioListAdapter
+    private val artObjectsAdapter = RijksstudioListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val coreModuleDependencies = EntryPointAccessors.fromApplication(
@@ -59,27 +61,37 @@ class RijksstudioListFragment : Fragment() {
     }
 
     private fun setUpRvWithArtObjectAdapter(){
-        artObjectsAdapter = RijksstudioListAdapter()
+        artObjectsAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         binding.rijksstudioRecyclerview.apply {
-            setHasFixedSize(true)
             adapter = artObjectsAdapter.withLoadStateFooter(footer = ArtLoadingStateAdapter())
-            artObjectsAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        }
+
+        artObjectsAdapter.addLoadStateListener { loadState->
+            // Show loading spinner during initial load or refresh.
+            binding.progressBar.isVisible = loadState.mediator?.refresh is LoadState.Loading
+            // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
+            val errorState = loadState.source.append as? LoadState.Error
+                ?: loadState.source.prepend as? LoadState.Error
+                ?: loadState.append as? LoadState.Error
+                ?: loadState.prepend as? LoadState.Error
+            errorState?.let {
+                Toast.makeText(
+                    requireContext(),
+                    "\uD83D\uDE28 Wooops ${it.error}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
 
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewLifecycleOwner.lifecycleScope.launch{
-            viewModel.getArtObjects().collect {
-                artObjectsAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+        lifecycleScope.launchWhenStarted {
+            viewModel.getArtObjects().collect { pagingData ->
+                artObjectsAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
             }
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding.rijksstudioRecyclerview.adapter = null
-
-    }
 }

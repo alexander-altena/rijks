@@ -1,4 +1,5 @@
 <resources>
     <string name="rijksmuseum">Rijksmuseum</string>
     <string name="no_info">No information Available</string>
+    <string name="empty">No information Available</string>
 </resources>

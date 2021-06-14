@@ -14,7 +14,8 @@
             android:id="@+id/showArtObjectDetail"
             app:destination="@id/rijksstudioDetailFragment"
             app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="com.android.tools.property.panel.api.EnumValue$Companion$LOADING$1@44647a87" />
     </fragment>
     <fragment
         android:id="@+id/rijksstudioDetailFragment"

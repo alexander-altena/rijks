@@ -8,6 +8,7 @@ object Versions {
     const val ANDROID_X_FRAGMENT_KTX_VERSION = "1.3.4"
     const val ANDROID_X_APPCOMPAT_VERSION = "1.3.0"
     const val ANDROID_X_LEGACY_VERSION = "1.0.0"
+    const val ANDROID_X_LIFECYCLE_RT_VERSION = "2.4.0-alpha01"
 
     //ViewModel
     const val ANDROID_X_LIFECYCLE_VERSION = "2.3.1"

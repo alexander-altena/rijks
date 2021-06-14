@@ -35,7 +35,7 @@
             tools:visibility="gone" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/art_object_detail_img"
             android:layout_width="0dp"
             android:layout_height="400dp"
             android:scaleType="fitCenter"
@@ -46,17 +46,27 @@
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/art_object_detail_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="21dp"
-            android:textColor="@color/black"
-            android:text="@{viewModel.artObjectDetail.data.description ?? @string/no_info}"
+            android:padding="@dimen/art_object_detail_text_padding"
+            android:text="@{viewModel.artObjectDetail.data.title ?? @string/no_info}"
+            android:textColor="@color/gold"
             android:textSize="21sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/art_object_detail_img" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/art_object_detail_text_padding"
+            android:textColor="@color/black"
+            android:text="@{viewModel.artObjectDetail.data.description ?? @string/empty}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/art_object_detail_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
