@@ -13,9 +13,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rijks.di.RijksstudioModuleDependencies
 import dagger.hilt.android.EntryPointAccessors
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collect
 import rijks.feature.rijksstudio.R
 import rijks.feature.rijksstudio.databinding.FragmentRijksstudioListBinding
 import rijks.feature.rijksstudio.di.DaggerRijksstudioListComponent

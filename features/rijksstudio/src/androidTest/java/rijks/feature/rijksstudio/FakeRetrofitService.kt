@@ -22,10 +22,6 @@ class FakeRetrofitService  : RijksRetrofitService {
         artObjects.clear()
     }
 
-    fun setArtObjectDetailResonse(artObjectDetailResponseJson: ArtObjectDetailJson){
-        artObjectDetail = artObjectDetailResponseJson
-    }
-
 
     override suspend fun getAllArtObjects(
         culture: String,

@@ -5,7 +5,6 @@ import com.example.rijks.di.RijksstudioModuleDependencies
 import dagger.BindsInstance
 import dagger.Component
 import rijks.feature.rijksstudio.presentation.detail.RijksstudioDetailFragment
-import rijks.feature.rijksstudio.presentation.list.RijksstudioListFragment
 
 @Component(
     dependencies = [RijksstudioModuleDependencies::class],

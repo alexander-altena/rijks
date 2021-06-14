@@ -10,7 +10,7 @@ import com.example.rijks.data.network.service.RijksRetrofitService
 import retrofit2.HttpException
 import java.io.IOException
 
-const val RIJKS_STARTING_PAGE_INDEX = 0;
+const val RIJKS_STARTING_PAGE_INDEX = 0
 
 @ExperimentalPagingApi
 class RijksstudioRemoteMediator(

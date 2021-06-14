@@ -1,4 +1,4 @@
-package com.example.rijks.common
+package rijks.feature.rijksstudio
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
