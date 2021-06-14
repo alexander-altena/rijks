@@ -4,6 +4,7 @@ object Dependencies {
     const val ANDROID_TOOLS_GRADLE = "com.android.tools.build:gradle:${Versions.BUILD_TOOLS_VERSION}"
     const val KOTLIN_TOOLS_GRADLE = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KOTLIN_VERSION}"
     const val DAGGER_HILT_GRADLE = "com.google.dagger:hilt-android-gradle-plugin:${Versions.DAGGER_HILT_VERSION}"
+    const val SAFE_ARGS_GRADLE = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.NAV_VERSION}"
 
 
     //Core
@@ -43,5 +44,8 @@ object Dependencies {
     //Dependency Injection
     const val DAGGER_HILT = "com.google.dagger:hilt-android:${Versions.DAGGER_HILT_VERSION}"
     const val DAGGER_HILT_KAPT = "com.google.dagger:hilt-android-compiler:${Versions.DAGGER_HILT_VERSION}"
+
+    //Coil
+    const val COIL = "io.coil-kt:coil:${Versions.COIL}"
 
 }

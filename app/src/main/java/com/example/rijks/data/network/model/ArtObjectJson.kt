@@ -12,7 +12,7 @@ data class ArtObjectJson(
     val longTitle : String,
     val showImage : Boolean,
     val permitDownload : Boolean,
-    val webImage : ArtWebImageJson,
+    val webImage : ArtWebImageJson?,
 
 )
 

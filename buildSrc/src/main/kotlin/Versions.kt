@@ -31,4 +31,6 @@ object Versions {
     //DI
     const val DAGGER_HILT_VERSION = "2.35"
 
+    const val COIL = "1.2.2"
+
 }

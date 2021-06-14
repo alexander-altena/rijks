@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "5e849d4dd200ffac68ba54af94b8d102",
+    "identityHash": "5fcec5b16ec9576c7914463475671fcc",
     "entities": [
       {
         "tableName": "art_objects",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `objectNumber` TEXT NOT NULL, `title` TEXT NOT NULL, `principalOrFirstMaker` TEXT, `imageUrl` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `objectNumber` TEXT NOT NULL, `title` TEXT NOT NULL, `principalOrFirstMaker` TEXT, `imageUrl` TEXT NOT NULL, `imgRatio` REAL NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -36,6 +36,12 @@
             "fieldPath": "imageUrl",
             "columnName": "imageUrl",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imgRatio",
+            "columnName": "imgRatio",
+            "affinity": "REAL",
             "notNull": true
           }
         ],
@@ -84,7 +90,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5e849d4dd200ffac68ba54af94b8d102')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5fcec5b16ec9576c7914463475671fcc')"
     ]
   }
 }

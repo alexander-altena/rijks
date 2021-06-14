@@ -1,26 +1,32 @@
 package rijks.feature.rijksstudio.list.data
 
 import androidx.paging.PagingData
+import com.example.rijks.common.Resource
 import com.example.rijks.domain.model.ArtObject
 import com.example.rijks.domain.model.ArtObjectDetail
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import rijks.feature.rijksstudio.domain.RijksstudioRepository
 
 class FakeRijkstudioRepository : RijksstudioRepository {
 
-    private var shouldReturnNetworkError = false
     private lateinit var pagingData: PagingData<ArtObject>
-
-    fun setShouldReturnNetworkError(value: Boolean) {
-        shouldReturnNetworkError = value
-    }
+    private var artObjectDetail : ArtObjectDetail? = null
 
     fun setPagingData(pagina: PagingData<ArtObject>){
        pagingData = pagina
     }
 
+    fun setArtObjectDetail(artObjectDetail: ArtObjectDetail){
+        this.artObjectDetail = artObjectDetail
+    }
+
     fun clearPaginaData(){
         pagingData = PagingData.empty()
+    }
+
+    fun clearObjectDetail(){
+        artObjectDetail = null
     }
 
     override fun getAllArtObjects(): Flow<PagingData<ArtObject>> {
@@ -29,7 +35,10 @@ class FakeRijkstudioRepository : RijksstudioRepository {
         }
     }
 
-    override suspend fun getArtObjectDetail(objectId: String): ArtObjectDetail {
-        TODO("Not yet implemented")
+    override suspend fun getArtObjectDetail(objectId: String): Resource<ArtObjectDetail> {
+      return if (objectId.isEmpty() || artObjectDetail == null) Resource.error("Error", null)
+        else{
+            Resource.success(artObjectDetail)
+        }
     }
 }

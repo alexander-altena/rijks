@@ -6,5 +6,6 @@ data class ArtObject (
     val objectNumber : String,
     val title : String,
     val principalOrFirstMaker : String?,
-    val imageUrl : String
+    val imageUrl : String,
+    val imgRatio: Float
 )

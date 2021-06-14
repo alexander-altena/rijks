@@ -1,20 +1,21 @@
+
 plugins {
     id(Plugins.ANDROID_DYNAMIC_FEATURE)
     id(Plugins.KOTLIN_ANDROID) // or kotlin("android") or id 'kotlin-android'
     id(Plugins.KOTLIN_KAPT)  // or kotlin("kapt")
     id(Plugins.DAGGER_HILT)
+    id(Plugins.SAFE_ARGS)
 }
 android {
     compileSdkVersion(AndroidConfig.COMPILE_SDK_VERSION)
 
     defaultConfig {
-        applicationId = AndroidConfig.ID
         minSdkVersion(AndroidConfig.MIN_SDK_VERSION)
         targetSdkVersion(AndroidConfig.TARGET_SDK_VERSION)
 
-        versionCode = AndroidConfig.VERSION_CODE
-        versionName = AndroidConfig.VERSION_NAME
-        testInstrumentationRunner = AndroidConfig.TEST_INSTRUMENTATION_RUNNER
+        testOptions {
+            unitTests.isIncludeAndroidResources = true
+        }
 
     }
 
@@ -49,13 +50,23 @@ dependencies {
     kapt(Dependencies.DAGGER_HILT_KAPT)
 
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.5.0")
     testImplementation("androidx.arch.core:core-testing:2.1.0")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
 
+
     androidTestImplementation ("junit:junit:4.13.2")
-    androidTestImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")
+    androidTestImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.5.0")
     androidTestImplementation ("androidx.test.ext:junit:1.1.2")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.3.0")
-    androidTestImplementation ("androidx.annotation:annotation:1.1.0")
+    androidTestImplementation ("androidx.annotation:annotation:1.2.0")
+    androidTestImplementation ("androidx.test:rules:1.3.0")
+    androidTestImplementation ("org.mockito:mockito-core:2.21.0")
+    androidTestImplementation ("androidx.arch.core:core-testing:2.1.0")
+    androidTestImplementation ("androidx.test.espresso:espresso-contrib:3.3.0")
+
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.28-alpha")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.35")
+
+    debugImplementation ("androidx.fragment:fragment-testing:1.4.0-alpha02")
 }

@@ -3,6 +3,7 @@ plugins {
     id(Plugins.KOTLIN_ANDROID) // or kotlin("android") or id 'kotlin-android'
     id(Plugins.KOTLIN_KAPT)  // or kotlin("kapt")
     id(Plugins.DAGGER_HILT)
+    id(Plugins.SAFE_ARGS)
 }
 
 android {
@@ -21,6 +22,10 @@ android {
             annotationProcessorOptions {
                 arguments += mapOf("room.schemaLocation" to "$projectDir/schemas")
             }
+        }
+
+        testOptions {
+            unitTests.isIncludeAndroidResources = true
         }
 
     }
@@ -88,13 +93,18 @@ dependencies {
     //Paging
     api(Dependencies.ANDROID_X_PAGING)
 
+    //Coil
+    api(Dependencies.COIL)
+
+
     testImplementation ("junit:junit:4.13.2")
-    testImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.4.21")
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
+    testImplementation ("org.jetbrains.kotlin:kotlin-test-junit:1.5.0")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
 
     androidTestImplementation ("androidx.test.ext:junit:1.1.2")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.3.0")
-    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
     androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
 
+    debugImplementation("androidx.fragment:fragment-testing:1.3.4")
 }

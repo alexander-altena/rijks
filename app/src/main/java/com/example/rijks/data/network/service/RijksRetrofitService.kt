@@ -2,6 +2,7 @@ package com.example.rijks.data.network.service
 
 import com.example.rijks.data.network.model.ArtObjectDetailResponseJson
 import com.example.rijks.data.network.model.ArtObjectResponseJson
+import com.example.rijks.data.network.model.ArtWebImageJson
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -14,6 +15,6 @@ interface RijksRetrofitService {
     suspend fun getAllArtObjects(@Path("culture") culture: String, @QueryMap options: HashMap<String, String>): ArtObjectResponseJson
 
     @GET("{culture}/collection/{objectNumber}")
-    suspend fun getArtObjectDetails(@Path("culture") culture: String, @Path("objectNumber") objectNumber: String, @Query("key") key: String): ArtObjectDetailResponseJson
+    suspend fun getArtObjectDetails(@Path("culture") culture: String, @Path("objectNumber") objectNumber: String, @Query("key") key: String): Response<ArtObjectDetailResponseJson>
 
 }

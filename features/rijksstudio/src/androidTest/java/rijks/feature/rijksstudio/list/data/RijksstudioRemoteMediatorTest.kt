@@ -2,7 +2,6 @@ package rijks.feature.rijksstudio.list.data
 
 import androidx.paging.*
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.rijks.data.database.ArtObjectEntity
@@ -16,6 +15,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import rijks.feature.rijksstudio.FakeRetrofitService
+import rijks.feature.rijksstudio.data.RijksstudioRemoteMediator
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 

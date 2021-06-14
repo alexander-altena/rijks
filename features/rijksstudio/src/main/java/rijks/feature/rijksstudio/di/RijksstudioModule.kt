@@ -1,11 +1,11 @@
-package rijks.feature.rijksstudio.list.di
+package rijks.feature.rijksstudio.di
 
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import rijks.feature.rijksstudio.list.data.RijksstudioRepositoryImp
-import rijks.feature.rijksstudio.list.domain.RijksstudioRepository
+import rijks.feature.rijksstudio.data.RijksstudioRepositoryImp
+import rijks.feature.rijksstudio.domain.RijksstudioRepository
 
 @Module
 @InstallIn(ActivityComponent::class)

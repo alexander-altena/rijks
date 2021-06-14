@@ -1,4 +1,4 @@
-package rijks.feature.rijksstudio.list.presentation
+package rijks.feature.rijksstudio.presentation.list
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import rijks.feature.rijksstudio.databinding.ItemLoadingStateBinding
+
 
 class ArtLoadingStateAdapter() : LoadStateAdapter<ArtLoadingStateAdapter.ArtObjectLoadStateViewHolder>() {
 
