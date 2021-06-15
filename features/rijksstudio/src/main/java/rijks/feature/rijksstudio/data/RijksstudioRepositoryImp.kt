@@ -25,7 +25,10 @@ class RijksstudioRepositoryImp @Inject constructor(
     override fun getAllArtObjects(): Flow<PagingData<ArtObject>> {
         val pagingSourceFactory = { artObjectDao.artObjects() }
         return Pager(
-            config = PagingConfig(pageSize = RIJKS_NETWORK_PAGE_SIZE),
+            config = PagingConfig(
+                pageSize = RIJKS_NETWORK_PAGE_SIZE,
+                enablePlaceholders = true,
+               ),
             remoteMediator = RijksstudioRemoteMediator(
                 database,
                 artObjectDao,

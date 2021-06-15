@@ -9,11 +9,14 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.whenStarted
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.RecyclerView
+import com.example.rijks.common.collectIn
 import com.example.rijks.di.RijksstudioModuleDependencies
 import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import rijks.feature.rijksstudio.R
 import rijks.feature.rijksstudio.databinding.FragmentRijksstudioListBinding
 import rijks.feature.rijksstudio.di.DaggerRijksstudioListComponent
@@ -43,6 +46,22 @@ class RijksstudioListFragment : Fragment() {
 
     }
 
+    init { // Notice that we can safely launch in the constructor of the Fragment.
+        lifecycleScope.launch {
+            whenStarted {
+                showArtObjects()
+            }
+
+        }
+    }
+
+    private suspend fun showArtObjects() {
+        viewModel.getArtObjects().collectLatest {
+            artObjectsAdapter.submitData(it)
+        }
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,17 +73,17 @@ class RijksstudioListFragment : Fragment() {
             container,
             false
         )
+
         setUpRvWithArtObjectAdapter()
         return binding.root
     }
 
-    private fun setUpRvWithArtObjectAdapter(){
-        artObjectsAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+    private fun setUpRvWithArtObjectAdapter() {
         binding.rijksstudioRecyclerview.apply {
             adapter = artObjectsAdapter.withLoadStateFooter(footer = ArtLoadingStateAdapter())
         }
 
-        artObjectsAdapter.addLoadStateListener { loadState->
+        artObjectsAdapter.addLoadStateListener { loadState ->
             // Show loading spinner during initial load or refresh.
             binding.progressBar.isVisible = loadState.mediator?.refresh is LoadState.Loading
             // Toast on any error, regardless of whether it came from RemoteMediator or PagingSource
@@ -80,16 +99,5 @@ class RijksstudioListFragment : Fragment() {
                 ).show()
             }
         }
-
     }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        lifecycleScope.launchWhenStarted {
-            viewModel.getArtObjects().collect { pagingData ->
-                artObjectsAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
-            }
-        }
-    }
-
 }

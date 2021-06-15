@@ -29,8 +29,6 @@ class RijksstudioRemoteMediator(
         state: PagingState<Int, ArtObjectEntity>
     ): MediatorResult {
 
-
-
         val page = when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)

@@ -23,12 +23,11 @@ class RijksstudioListAdapter :
     ) {
 
 
-    override fun getItemViewType(position: Int): Int {
-        val item = getItem(position)
-        if (item is ArtObjectList.ArtObjectHeader) {
-            return HEADER
-        }
-        return getArtObjectViewType(item as ArtObjectList.ArtObjectItem)
+    override fun getItemViewType(position: Int)  =
+        when (getItem(position)){
+            is ArtObjectList.ArtObjectItem -> getArtObjectViewType(getItem(position) as ArtObjectList.ArtObjectItem)
+            is ArtObjectList.ArtObjectHeader -> HEADER
+            null -> throw IllegalStateException("Unknown view")
     }
 
 
