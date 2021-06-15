@@ -11,10 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.whenStarted
 import androidx.paging.LoadState
-import com.example.rijks.common.collectIn
 import com.example.rijks.di.RijksstudioModuleDependencies
 import dagger.hilt.android.EntryPointAccessors
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import rijks.feature.rijksstudio.R

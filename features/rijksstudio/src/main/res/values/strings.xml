@@ -2,4 +2,6 @@
     <string name="rijksmuseum">Rijksmuseum</string>
     <string name="no_info">No information Available</string>
     <string name="empty">No information Available</string>
+    <string name="detail_image_of_the_art_object">Detail image of the Art Object</string>
+    <string name="art_object_image">Art Object Image</string>
 </resources>
