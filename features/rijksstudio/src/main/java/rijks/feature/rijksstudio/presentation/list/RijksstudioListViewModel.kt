@@ -8,6 +8,7 @@ import androidx.paging.insertSeparators
 import androidx.paging.map
 import com.example.rijks.domain.model.ArtObjectList
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import rijks.feature.rijksstudio.domain.RijksstudioRepository
 import javax.inject.Inject
@@ -31,7 +32,7 @@ class RijksstudioListViewModel @Inject constructor(private val rijksstudioReposi
                     }
 
                     else {
-                        return@insertSeparators null
+                         null
                     }
                 }
             }

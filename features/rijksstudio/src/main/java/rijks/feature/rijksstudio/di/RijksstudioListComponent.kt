@@ -10,6 +10,7 @@ import rijks.feature.rijksstudio.presentation.list.RijksstudioListFragment
     dependencies = [RijksstudioModuleDependencies::class],
     modules = [RijksstudioModule::class]
 )
+
 interface RijksstudioListComponent {
 
     fun inject(artObjectListFragment: RijksstudioListFragment)
