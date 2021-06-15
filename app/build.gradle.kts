@@ -65,7 +65,6 @@ dependencies {
     api (Dependencies.ANDROID_X_FRAGMENT_KTX)
     api (Dependencies.ANDROID_X_APPCOMPAT)
     api (Dependencies.ANDROID_X_LEGACY)
-    api (  "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha01")
 
     //Kotlin
     api (Dependencies.KOTLIN)

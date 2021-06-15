@@ -42,7 +42,8 @@
             app:imageUrl="@{viewModel.artObjectDetail.data.imageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/detail_image_of_the_art_object" />
 
 
         <TextView
@@ -50,6 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/art_object_detail_text_padding"
+            android:visibility="@{viewModel.artObjectDetail.status == status.LOADING ? View.GONE : View.VISIBLE}"
             android:text="@{viewModel.artObjectDetail.data.title ?? @string/no_info}"
             android:textColor="@color/gold"
             android:textSize="21sp"
@@ -63,6 +65,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/art_object_detail_text_padding"
             android:textColor="@color/black"
+            android:visibility="@{viewModel.artObjectDetail.status == status.LOADING ? View.GONE : View.VISIBLE}"
             android:text="@{viewModel.artObjectDetail.data.description ?? @string/empty}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

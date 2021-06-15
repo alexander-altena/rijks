@@ -21,7 +21,8 @@
             android:layout_height="@dimen/art_object_list_img_height"
             android:scaleType="centerCrop"
             app:imageUrl="@{artObject.imageUrl}"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:contentDescription="@string/art_object_image" />
 
         <TextView
             android:layout_width="match_parent"
